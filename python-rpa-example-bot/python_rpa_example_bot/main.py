@@ -8,7 +8,7 @@ from simple_salesforce import Salesforce
 from typing import List
 import time
 import os
-
+# from RPA.Robocorp.Vault import Vault
 
 def send_message_to_sfdc_messages_channel(message: str) -> None:
         """Sends a message to the SFDC Messages channel on MS Teams
@@ -16,6 +16,10 @@ def send_message_to_sfdc_messages_channel(message: str) -> None:
         :param message: the text message you want to sent teams
         :return: None
         """
+        # _vault = Vault()
+        # teams_secret = _vault.get_secret("teams")
+        # uri = teams_secret["uri"]
+
         uri = os.environ.get("TEAMSURI")
         my_teams_message = pymsteams.connectorcard(uri)
         my_teams_message.text(message)
@@ -40,6 +44,12 @@ def main() -> None:
     sf_username = os.environ.get("SFUSERNAME")
     sf_password = os.environ.get("SFPASSWORD")
     sf_token = os.environ.get("SFTOKEN")
+
+    # _vault = Vault()
+    # sf_secret = _vault.get_secret("salesforce")
+    # sf_username = sf_secret["api_username"]
+    # sf_password = sf_secret["api_password"]
+    # sf_token = sf_secret["api_token"]
     sf = Salesforce(username=f'{sf_username}', password=f'{sf_password}', security_token=f'{sf_token}')
 
     
@@ -102,6 +112,7 @@ def main() -> None:
         }
         sf.FeedAttachment.create(caseAttachment_data)
 
+        # base_url = sf_secret["base_url"]
         base_url = os.environ.get("SFBASEURL")
         message = f"Case {case_dict_master[x]['case']} has been updated on SalesForce: https://{base_url}.lightning.force.com/lightning/r/Case/{case_dict_master[x]['case_id']}/view"
         send_message_to_sfdc_messages_channel(message)
@@ -142,3 +153,6 @@ def list_bucket_names() -> List:
         bucket_names.append(bucket.name)
     
     return bucket_names
+
+if __name__ == "__main__":
+    main()
