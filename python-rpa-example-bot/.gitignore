@@ -1,4 +1,3 @@
-output/
-Review Cases.xlsx
+output/*
 .DS_Store
 /.DS_Store
