@@ -12,7 +12,8 @@ graph TD
     B -->|Extract the case number and <br>send to Salesforce| C(Salesforce)
     C -->|Find the Case Contact Name's <br>Mailing Address and look up <br>property address| D[www.google.com/maps]
     D -->|Add maps screenshot as a FeedItem| C
-    C 
+    C -->|Once case FeedItem has been updated <br>send message to Teams channel| E[Teams]
+```
 
 # Prerequisites
 
