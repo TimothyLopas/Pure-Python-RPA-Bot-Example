@@ -1,3 +1,0 @@
-This is a simple Python based RPA project that replicates what could be a more complex business process.
-
-The bot starts off by connecting to AWS S3 to download an excel file, extract the data from that excel file in the form of Salesforce case number, and then uses those case numbers to extract contact addresses. Those addresses are then entered into Google Maps and a screenshot is taken and saved to an output folder. Once completed it uploads the images as a FeedItem to the Salesforce case and finally sends a teams message alearting the channel that the case has been updated.
